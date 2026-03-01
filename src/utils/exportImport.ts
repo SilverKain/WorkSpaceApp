@@ -41,7 +41,7 @@ export function exportBoardToPNG(stageRef: RefObject<Konva.Stage | null>, boardN
   if (!stageRef.current) return;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const stage = stageRef.current as any;
-  const dataURL = stage.toDataURL({ pixelRatio: 2 });
+  const dataURL = stage.toDataURL({ pixelRatio: 2, mimeType: 'image/png', background: '#dde3ea' });
   const a = document.createElement('a');
   a.href = dataURL;
   a.download = `${boardName.replace(/\s+/g, '_')}_board.png`;

@@ -375,7 +375,7 @@ const Board: React.FC = () => {
   const canRedo = (currentBoardData?.historyIndex ?? 0) < (currentBoardData?.history.length ?? 1) - 1;
 
   return (
-    <div className="w-screen h-screen overflow-hidden" style={{ background: '#1e293b' }}>
+    <div className="w-screen h-screen overflow-hidden" style={{ background: '#dde3ea' }}>
       <Toolbar
         activeTool={activeTool}
         onToolSelect={(t) => {
@@ -421,7 +421,7 @@ const Board: React.FC = () => {
               setStagePos({ x: e.target.x(), y: e.target.y() });
             }
           }}
-          style={{ background: '#1e293b', cursor: activeTool === 'arrow' ? 'crosshair' : 'default', touchAction: 'none' }}
+          style={{ background: '#dde3ea', cursor: activeTool === 'arrow' ? 'crosshair' : 'default', touchAction: 'none' }}
         >
           <Layer>
             {/* Стрелки рендерятся первыми (под объектами) */}
@@ -488,18 +488,18 @@ const Board: React.FC = () => {
       {/* Контекстная панель выбранного объекта */}
       {selectedId && activeTool === 'select' && (
         <div
-          className="fixed left-1/2 -translate-x-1/2 z-50 bg-slate-800 rounded-xl shadow-xl border border-slate-600 flex items-center gap-1 px-2 py-1.5"
+          className="fixed left-1/2 -translate-x-1/2 z-50 bg-white rounded-xl shadow-xl border border-gray-300 flex items-center gap-1 px-2 py-1.5"
           style={{ bottom: '24px' }}
         >
           <button
             onClick={() => { deleteObject(selectedId); setSelectedId(null); }}
-            className="px-3 py-1.5 text-xs text-red-400 hover:bg-red-900/40 rounded-lg transition-colors font-medium"
+            className="px-3 py-1.5 text-xs text-red-600 font-medium hover:bg-red-50 rounded-lg transition-colors"
           >
             🗑️ Удалить
           </button>
           <button
             onClick={() => setSelectedId(null)}
-            className="px-3 py-1.5 text-xs text-slate-300 hover:bg-slate-700 rounded-lg transition-colors"
+            className="px-3 py-1.5 text-xs text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
           >
             ✕
           </button>
@@ -507,7 +507,7 @@ const Board: React.FC = () => {
       )}
 
       {/* Счётчик объектов (десктоп) */}
-      <div className="fixed bg-slate-700 rounded-lg shadow-sm border border-slate-600 px-2 py-1 text-xs text-slate-300 hidden sm:block z-40"
+      <div className="fixed bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-300 px-2 py-1 text-xs text-gray-600 hidden sm:block z-40"
            style={{ bottom: '16px', right: '16px' }}>
         {nonArrowObjects.length} объектов&nbsp;•&nbsp;{arrowObjects.length} связей&nbsp;•&nbsp;{Math.round(stageScale * 100)}%
       </div>

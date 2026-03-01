@@ -68,26 +68,26 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
       </div>
 
       {/* Actions */}
-      <div className="px-3 pb-3 flex items-center gap-1">
+      <div className="px-3 pb-3 flex items-center gap-1.5">
         <button
           onClick={() => onSelect(board.id)}
-          className="flex-1 bg-indigo-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-indigo-500 transition-colors shadow-sm"
+          className="flex-1 bg-gray-900 text-white text-sm font-semibold py-2 rounded-lg hover:bg-gray-700 transition-colors shadow-sm"
         >
           Открыть
         </button>
         <button
           onClick={() => setEditing(true)}
           title="Переименовать"
-          className="p-1.5 text-slate-500 hover:text-indigo-400 hover:bg-slate-700 rounded-lg transition-colors"
+          className="px-2.5 py-2 text-xs font-semibold bg-slate-700 text-slate-200 hover:bg-slate-600 hover:text-white rounded-lg transition-colors"
         >
-          ✏️
+          Имя
         </button>
         <button
           onClick={() => onDelete(board.id)}
           title="Удалить"
-          className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
+          className="px-2.5 py-2 text-xs font-semibold bg-red-900/60 text-red-300 hover:bg-red-700 hover:text-white rounded-lg transition-colors"
         >
-          🗑️
+          Удалить
         </button>
       </div>
     </div>

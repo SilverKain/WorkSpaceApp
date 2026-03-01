@@ -125,6 +125,8 @@ const CardNode: React.FC<CardNodeProps> = React.memo(({ obj, isSelected, onSelec
             fontSize={14}
             fill={obj.style?.color || '#374151'}
             wrap="word"
+            align="center"
+            verticalAlign="middle"
             listening={false}
           />
         )}
