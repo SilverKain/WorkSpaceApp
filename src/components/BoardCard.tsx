@@ -28,13 +28,13 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
   });
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-shadow flex flex-col overflow-hidden group">
+    <div className="bg-slate-800 rounded-xl shadow-md border border-slate-700 hover:border-indigo-500 transition-all hover:shadow-indigo-900/30 hover:shadow-lg flex flex-col overflow-hidden group">
       {/* Board preview area */}
       <div
-        className="h-32 bg-gradient-to-br from-indigo-50 to-purple-50 flex items-center justify-center cursor-pointer"
+        className="h-32 bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center cursor-pointer"
         onClick={() => onSelect(board.id)}
       >
-        <div className="text-4xl opacity-30">📋</div>
+        <div className="text-4xl opacity-40">📋</div>
       </div>
 
       {/* Board info */}
@@ -42,7 +42,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
         {editing ? (
           <input
             autoFocus
-            className="text-sm font-semibold text-gray-800 border border-indigo-400 rounded px-1 w-full focus:outline-none"
+            className="text-sm font-semibold text-white bg-slate-700 border border-indigo-500 rounded px-1 w-full focus:outline-none"
             value={name}
             onChange={e => setName(e.target.value)}
             onBlur={handleRename}
@@ -53,7 +53,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
           />
         ) : (
           <h3
-            className="text-sm font-semibold text-gray-800 truncate cursor-pointer hover:text-indigo-600"
+            className="text-sm font-semibold text-slate-100 truncate cursor-pointer hover:text-indigo-400 transition-colors"
             onDoubleClick={() => setEditing(true)}
             title={board.name}
           >
@@ -61,7 +61,7 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
           </h3>
         )}
 
-        <div className="flex items-center justify-between text-xs text-gray-400">
+        <div className="flex items-center justify-between text-xs text-slate-500">
           <span>{objectCount} объектов</span>
           <span>{updatedDate}</span>
         </div>
@@ -71,21 +71,21 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
       <div className="px-3 pb-3 flex items-center gap-1">
         <button
           onClick={() => onSelect(board.id)}
-          className="flex-1 bg-indigo-600 text-white text-xs font-medium py-1.5 rounded-lg hover:bg-indigo-700 transition-colors"
+          className="flex-1 bg-indigo-600 text-white text-xs font-semibold py-2 rounded-lg hover:bg-indigo-500 transition-colors shadow-sm"
         >
           Открыть
         </button>
         <button
           onClick={() => setEditing(true)}
           title="Переименовать"
-          className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
+          className="p-1.5 text-slate-500 hover:text-indigo-400 hover:bg-slate-700 rounded-lg transition-colors"
         >
           ✏️
         </button>
         <button
           onClick={() => onDelete(board.id)}
           title="Удалить"
-          className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+          className="p-1.5 text-slate-500 hover:text-red-400 hover:bg-red-900/30 rounded-lg transition-colors"
         >
           🗑️
         </button>
