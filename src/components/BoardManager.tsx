@@ -3,7 +3,7 @@ import { useAppStore } from '../store/useAppStore';
 import BoardCard from './BoardCard';
 
 const BoardManager: React.FC = () => {
-  const { boardsMeta, createBoard, deleteBoard, renameBoard, duplicateBoard, selectBoard } = useAppStore();
+  const { boardsMeta, createBoard, deleteBoard, renameBoard, selectBoard } = useAppStore();
 
   // Load object counts from localStorage
   const getObjectCount = (boardId: string): number => {
@@ -30,20 +30,13 @@ const BoardManager: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 sm:px-8 py-4 flex items-center justify-between">
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-8 py-4 flex items-center">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 bg-indigo-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
             B
           </div>
           <h1 className="text-xl font-bold text-gray-900">Доски</h1>
         </div>
-        <button
-          onClick={createBoard}
-          className="flex items-center gap-2 bg-indigo-600 text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm"
-        >
-          <span>+</span>
-          <span>Новая доска</span>
-        </button>
       </header>
 
       {/* Content */}
@@ -70,7 +63,6 @@ const BoardManager: React.FC = () => {
                 objectCount={getObjectCount(board.id)}
                 onSelect={selectBoard}
                 onDelete={handleDelete}
-                onDuplicate={duplicateBoard}
                 onRename={renameBoard}
               />
             ))}

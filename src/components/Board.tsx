@@ -242,6 +242,33 @@ const Board: React.FC = () => {
     lastCenter.current = null;
   }, []);
 
+  // ---- Button zoom (mobile) ----
+  const handleZoomIn = useCallback(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const newScale = Math.min(5, stageScale * 1.3);
+    const w = stage.width();
+    const h = stage.height();
+    setStageScale(newScale);
+    setStagePos({
+      x: w / 2 - (w / 2 - stagePos.x) * (newScale / stageScale),
+      y: h / 2 - (h / 2 - stagePos.y) * (newScale / stageScale),
+    });
+  }, [stageScale, stagePos]);
+
+  const handleZoomOut = useCallback(() => {
+    const stage = stageRef.current;
+    if (!stage) return;
+    const newScale = Math.max(0.1, stageScale / 1.3);
+    const w = stage.width();
+    const h = stage.height();
+    setStageScale(newScale);
+    setStagePos({
+      x: w / 2 - (w / 2 - stagePos.x) * (newScale / stageScale),
+      y: h / 2 - (h / 2 - stagePos.y) * (newScale / stageScale),
+    });
+  }, [stageScale, stagePos]);
+
   // ---- Click on empty area deselects / cancels arrow ----
   const handleStageClick = useCallback((e: Konva.KonvaEventObject<MouseEvent | TouchEvent>) => {
     if (e.target === e.target.getStage()) {
@@ -337,7 +364,6 @@ const Board: React.FC = () => {
   const arrowObjects = objects.filter(o => o.type === 'arrow');
   const canUndo = (currentBoardData?.historyIndex ?? 0) > 0;
   const canRedo = (currentBoardData?.historyIndex ?? 0) < (currentBoardData?.history.length ?? 1) - 1;
-  const MOBILE_BOTTOM_H = 60;
 
   return (
     <div className="w-screen h-screen overflow-hidden" style={{ background: '#f3f4f6' }}>
@@ -358,6 +384,8 @@ const Board: React.FC = () => {
         onUndo={undo}
         onRedo={redo}
         onBack={goToBoardManager}
+        onZoomIn={handleZoomIn}
+        onZoomOut={handleZoomOut}
         boardName={boardMeta?.name || 'Доска'}
         canUndo={canUndo}
         canRedo={canRedo}
@@ -452,19 +480,13 @@ const Board: React.FC = () => {
       {selectedId && activeTool === 'select' && (
         <div
           className="fixed left-1/2 -translate-x-1/2 z-50 bg-white rounded-xl shadow-lg border border-gray-200 flex items-center gap-1 px-2 py-1.5"
-          style={{ bottom: `calc(${MOBILE_BOTTOM_H + 8}px + env(safe-area-inset-bottom, 0px))` }}
+          style={{ bottom: '24px' }}
         >
           <button
             onClick={() => { deleteObject(selectedId); setSelectedId(null); }}
             className="px-3 py-1.5 text-xs text-red-500 hover:bg-red-50 rounded-lg transition-colors"
           >
             🗑️ Удалить
-          </button>
-          <button
-            onClick={() => duplicateObject(selectedId)}
-            className="px-3 py-1.5 text-xs text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-          >
-            📋 Дублировать
           </button>
           <button
             onClick={() => setSelectedId(null)}
@@ -488,8 +510,7 @@ const Board: React.FC = () => {
         </div>
       )}
 
-      {/* Отступ под мобильную нижнюю панель */}
-      <div className="block sm:hidden" style={{ height: `${MOBILE_BOTTOM_H}px` }} />
+
     </div>
   );
 };

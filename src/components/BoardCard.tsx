@@ -6,11 +6,10 @@ interface BoardCardProps {
   objectCount: number;
   onSelect: (id: string) => void;
   onDelete: (id: string) => void;
-  onDuplicate: (id: string) => void;
   onRename: (id: string, name: string) => void;
 }
 
-const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onDelete, onDuplicate, onRename }) => {
+const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onDelete, onRename }) => {
   const [editing, setEditing] = useState(false);
   const [name, setName] = useState(board.name);
 
@@ -82,13 +81,6 @@ const BoardCard: React.FC<BoardCardProps> = ({ board, objectCount, onSelect, onD
           className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
         >
           ✏️
-        </button>
-        <button
-          onClick={() => onDuplicate(board.id)}
-          title="Дублировать"
-          className="p-1.5 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-        >
-          📋
         </button>
         <button
           onClick={() => onDelete(board.id)}
